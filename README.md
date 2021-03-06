@@ -1,8 +1,9 @@
 # NRRD Resolution Manager
 nrm is a python script for managing the resolution of an NRRD file.
 ### Dependencies
-[Python](https://www.python.org/downloads/)
-[pynrrd](https://pypi.org/project/pynrrd/)
+[Python](https://www.python.org/downloads/)  
+[pynrrd](https://pypi.org/project/pynrrd/)  
+[numpy](https://numpy.org/)
 ### Example usage
 `/> nrm.py [.nrrd input file] [.nrrd output file] [slice step]`
 ### Slice Step?
