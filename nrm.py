@@ -7,10 +7,11 @@ import sys
 This python script takes in an nrrd file and spits out a compressed, and potentially sliced, nrrd file
 The execution of the script is as follows:
 
-> nrrd_data_extractor.py [.nrrd input file] [.nrrd output file] [slice step]
+Usage:
+> nrm.py [.nrrd input file] [.nrrd output file] [slice step]
 
 EXAMPLE:
-> nrrd_data_extractor.py skull.nrrd skull_medium.nrrd 2
+> nrm.py skull.nrrd skull_medium.nrrd 2
 '''
 
 # import nrrd file from command line
