@@ -7,33 +7,45 @@ import sys
 This python script takes in an nrrd file and spits out a compressed, and potentially sliced, nrrd file
 The execution of the script is as follows:
 
-Usage:
 > nrm.py [.nrrd input file] [.nrrd output file] [slice step]
 
 EXAMPLE:
 > nrm.py skull.nrrd skull_medium.nrrd 2
 '''
 
-# import nrrd file from command line
-original_nrrd_file = sys.argv[1]
-converted_nrrd_file = sys.argv[2]
-INDEX_STEP = int(sys.argv[3])
-
-# read nrrd file and parse data and header
-data, header  = nrrd.read(original_nrrd_file)
-
 class NrrdSizes(Enum):
     XSIZE = 0
     YSIZE = 1
     ZSIZE = 2
+
+
+original_nrrd_file = sys.argv[1]
+converted_nrrd_file = sys.argv[2]
+
+# read nrrd file and parse data and header
+try:
+    data, header  = nrrd.read(original_nrrd_file)
+except FileNotFoundError:
+    print(original_nrrd_file, "not found")
+    sys.exit()
 
 # size of x, y, and z according to header
 x_size = header["sizes"][NrrdSizes.XSIZE.value]
 y_size = header["sizes"][NrrdSizes.YSIZE.value]
 z_size = header["sizes"][NrrdSizes.ZSIZE.value]
 
-if INDEX_STEP < 0 and INDEX_STEP < x_size:
-    print("Slice step must be positive and less than the number of available slices")
+if (original_nrrd_file.split('.')[-1] != "nrrd" or converted_nrrd_file.split('.')[-1] != "nrrd"):
+    print("File must be an NRRD")
+    sys.exit()
+
+try:
+    INDEX_STEP = int(sys.argv[3])
+
+    if INDEX_STEP < 0 and INDEX_STEP < x_size:
+        print("Slice step must be positive and less than the number of available slices")
+    sys.exit()
+except ValueError:
+    print("Slice step must be a number")
     sys.exit()
 
 index_lst = [] # list to keep track of indicies containing non-zero data
