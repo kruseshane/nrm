@@ -43,7 +43,7 @@ try:
 
     if INDEX_STEP < 0 and INDEX_STEP > x_size:
         print("Slice step must be positive and less than the number of available slices")
-    sys.exit()
+        sys.exit()
 except ValueError:
     print("Slice step must be a number")
     sys.exit()
