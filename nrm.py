@@ -41,7 +41,7 @@ if (original_nrrd_file.split('.')[-1] != "nrrd" or converted_nrrd_file.split('.'
 try:
     INDEX_STEP = int(sys.argv[3])
 
-    if INDEX_STEP < 0 and INDEX_STEP < x_size:
+    if INDEX_STEP < 0 and INDEX_STEP > x_size:
         print("Slice step must be positive and less than the number of available slices")
     sys.exit()
 except ValueError:
